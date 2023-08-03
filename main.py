@@ -1,5 +1,5 @@
 from pulp import *
-
+import json
 def weekly_possible_shifts(l):
     union_set = set()
 
@@ -10,7 +10,7 @@ def weekly_possible_shifts(l):
 
     # Convert the union_set back to a list and return
     return list(union_set)
-    
+
 def get_possible_shifts(opening_hour, closing_hour, min_hours_per_shift, max_hours_per_shift):
     possible_shifts = []
     shift_start = opening_hour
@@ -55,6 +55,21 @@ opening = {
     "Saturday": (10, 15),
     "Sunday": (11, 14)
 }
+min_weekly_hours = {
+    'Employee1': 10,
+    'Employee2': 15,
+    'Employee3': 12,
+    'Employee4': 8,
+    'Employee5': 20
+}
+
+max_weekly_hours = {
+    'Employee1': 40,
+    'Employee2': 30,
+    'Employee3': 25,
+    'Employee4': 20,
+    'Employee5': 35
+}
 
 availability = {
     'Employee1': {
@@ -86,6 +101,10 @@ availability = {
     }
 }
 
+with open('opening.json', 'r') as file:
+    opening = json.load(file)
+with open('availability.json', 'r') as file:
+    availability = json.load(file)
 #check_employee_availability(opening_hours=opening, availability=availability)
 
 shifts = dict()
@@ -109,8 +128,8 @@ for i in employees:
 model += lpSum(x[i, day, shift] * (shift[1] - shift[0]) for i in employees for day in days for shift in weekly_shifts)
 
 for i in employees:
-    model += lpSum(x[i, day, shift] * (shift[1] - shift[0]) for day in days for shift in weekly_shifts) >= min_weekly_hours
-    model += lpSum(x[i, day, shift] * (shift[1] - shift[0]) for day in days for shift in weekly_shifts) <= max_weekly_hours
+    model += lpSum(x[i, day, shift] * (shift[1] - shift[0]) for day in days for shift in weekly_shifts) >= min_weekly_hours[i]
+    model += lpSum(x[i, day, shift] * (shift[1] - shift[0]) for day in days for shift in weekly_shifts) <= max_weekly_hours[i]
 
 for i in employees:
     for day in days:
@@ -132,6 +151,8 @@ model.solve()
 assigned_shifts = {}
 if LpStatus[model.status] == 'Optimal':
     print("Optimal Solution Found.")
+    print(max_weekly_hours)
+    print(min_weekly_hours)
     print(opening)
     for i in employees:
         assigned_shifts[i] = {}

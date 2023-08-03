@@ -1,0 +1,47 @@
+{
+    "Employee1": {
+        "Monday": [8, 20],
+        "Tuesday": [12, 20],
+        "Wednesday": [8, 12],
+        "Thursday": [9, 17],
+        "Friday": [9, 16],
+        "Saturday": [10, 18],
+        "Sunday": [12, 20]
+    },
+    "Employee2": {
+        "Monday": [8, 12],
+        "Tuesday": [8, 20],
+        "Wednesday": [15, 20],
+        "Thursday": [8, 16],
+        "Friday": [8, 18],
+        "Saturday": [11, 15],
+        "Sunday": [9, 13]
+    },
+    "Employee3": {
+        "Monday": [10, 20],
+        "Tuesday": [8, 21],
+        "Wednesday": [12, 18],
+        "Thursday": [10, 15],
+        "Friday": [11, 19],
+        "Saturday": [10, 17],
+        "Sunday": [9, 16]
+    },
+    "Employee4": {
+        "Monday": [8, 14],
+        "Tuesday": [8, 20],
+        "Wednesday": [8, 12],
+        "Thursday": [12, 20],
+        "Friday": [9, 18],
+        "Saturday": [8, 17],
+        "Sunday": [12, 20]
+    },
+    "Employee5": {
+        "Monday": [8, 16],
+        "Tuesday": [8, 15],
+        "Wednesday": [9, 12],
+        "Thursday": [10, 20],
+        "Friday": [8, 19],
+        "Saturday": [11, 18],
+        "Sunday": [12, 17]
+    }
+}
