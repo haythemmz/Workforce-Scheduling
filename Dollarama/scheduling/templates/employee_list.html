@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee List</title>
+</head>
+<body>
+    <h1>Employee List</h1>
+    <ul>
+        {% for employee in employees %}
+            <li>{{ employee.name }} (ID: {{ employee.id }})</li>
+            <ul>
+                <li>Birthday: {{ employee.birthday }}</li>
+                <li>Contact Info: {{ employee.contact_info }}</li>
+                <li>Availability:</li>
+                <ul>
+                    {% for day, hours in employee.availability.items %}
+                        <li>{{ day }}: {{ hours.0 }} to {{ hours.1 }}</li>
+                    {% endfor %}
+                </ul>
+            </ul>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'index' %}">Go Back to Home</a></p>
+</body>
+</html>

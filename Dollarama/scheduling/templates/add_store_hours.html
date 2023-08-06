@@ -1,0 +1,47 @@
+<!-- add_store_hours.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Store Hours</title>
+</head>
+<body>
+    <h1>Add Store Hours</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add Store Hours">
+    </form>
+
+    <h2>Store Hours Schedule</h2>
+    <table>
+        <tr>
+            <th>Day</th>
+            <th>Opening Hours</th>
+            <th>Closing Hours</th>
+        </tr>
+        {% for day in form.fields.day.choices %}
+        <tr>
+            <td>{{ day.1 }}</td>
+            <td>
+                <ul>
+                    {% for store_hour in store_hours %}
+                    {% if store_hour.day == day.0 %}
+                    <li>{{ store_hour.opening_time }}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul>
+                    {% for store_hour in store_hours %}
+                    {% if store_hour.day == day.0 %}
+                    <li>{{ store_hour.closing_time }}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

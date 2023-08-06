@@ -1,0 +1,20 @@
+<!-- add_employee.html -->
+<!-- add_edit_employee.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add/Edit Employee</title>
+</head>
+<body>
+    <h1>Add/Edit Employee</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ employee_form.as_p }}
+        {% for form in availability_forms %}
+            {{ form.as_p }}
+        {% endfor %}
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>
+

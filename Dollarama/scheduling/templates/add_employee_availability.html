@@ -1,0 +1,23 @@
+<!-- add_edit_employee.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add/Edit Employee</title>
+</head>
+<body>
+    <h1>Add/Edit Employee</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        {% for form in formset %}
+            <h2>{{ form.instance.day }}</h2>
+            <p>Opening Time: {{ form.opening_time }}</p>
+            <p>Closing Time: {{ form.closing_time }}</p>
+        {% endfor %}
+        
+        {{ formset.management_form }}
+        <input type="submit" value="Save">
+    </form>
+</body>
+</html>
