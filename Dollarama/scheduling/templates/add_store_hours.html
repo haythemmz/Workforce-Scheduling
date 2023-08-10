@@ -1,47 +1,46 @@
-<!-- add_store_hours.html -->
+<!-- add_edit_employee.html -->
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Store Hours</title>
+    <title>Add/Edit Employee</title>
 </head>
 <body>
-    <h1>Add Store Hours</h1>
+    <h1>Add/Edit Employee</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Add Store Hours">
+        <h2>Availability</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Start Hour</th>
+                    <th>End Hour</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for formset in availability_forms %}
+                <tr>
+                    <td>{{ formset.day }}</td>
+                    <td>
+                        <ul>
+                            {% for start_hour_choice in formset.start_hour.field.choices %}
+                            <li>{{ start_hour_choice.1 }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            {% for end_hour_choice in formset.end_hour.field.choices %}
+                            <li>{{ end_hour_choice.1 }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <input type="submit" value="Save">
     </form>
-
-    <h2>Store Hours Schedule</h2>
-    <table>
-        <tr>
-            <th>Day</th>
-            <th>Opening Hours</th>
-            <th>Closing Hours</th>
-        </tr>
-        {% for day in form.fields.day.choices %}
-        <tr>
-            <td>{{ day.1 }}</td>
-            <td>
-                <ul>
-                    {% for store_hour in store_hours %}
-                    {% if store_hour.day == day.0 %}
-                    <li>{{ store_hour.opening_time }}</li>
-                    {% endif %}
-                    {% endfor %}
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    {% for store_hour in store_hours %}
-                    {% if store_hour.day == day.0 %}
-                    <li>{{ store_hour.closing_time }}</li>
-                    {% endif %}
-                    {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
 </body>
 </html>

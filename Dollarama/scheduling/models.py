@@ -1,4 +1,6 @@
 from django.db import models
+
+
 DAY_CHOICES = [
     ('Monday', 'Monday'),
     ('Tuesday', 'Tuesday'),
@@ -9,51 +11,32 @@ DAY_CHOICES = [
     ('Sunday', 'Sunday'),
 ]
 
-HOUR_CHOICES = [
-    ('00:00', '00:00'),
-    ('01:00', '01:00'),
-    ('02:00', '02:00'),
-    ('03:00', '03:00'),
-    ('04:00', '04:00'),
-    ('05:00', '05:00'),
-    ('06:00', '06:00'),
-    ('07:00', '07:00'),
-    ('08:00', '08:00'),
-    ('09:00', '09:00'),
-    ('10:00', '10:00'),
-    ('11:00', '11:00'),
-    ('12:00', '12:00'),
-    ('13:00', '13:00'),
-    ('14:00', '14:00'),
-    ('15:00', '15:00'),
-    ('16:00', '16:00'),
-    ('17:00', '17:00'),
-    ('18:00', '18:00'),
-    ('19:00', '19:00'),
-    ('20:00', '20:00'),
-    ('21:00', '21:00'),
-    ('22:00', '22:00'),
-    ('23:00', '23:00'),
-]
-
 class Employee(models.Model):
     name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20)
     birthday = models.DateField()
     min_working_hours_weekly = models.IntegerField(default=10)
     max_working_hours_weekly = models.IntegerField(default=40)
+    
+    # Availability fields
+    start_monday = models.PositiveIntegerField(default=8, help_text='Start hour for Monday (0-23)')
+    end_monday = models.PositiveIntegerField(default=17, help_text='End hour for Monday (0-23)')
+    start_tuesday = models.PositiveIntegerField(default=8, help_text='Start hour for Tuesday (0-23)')
+    end_tuesday = models.PositiveIntegerField(default=17, help_text='End hour for Tuesday (0-23)')
+    start_wednesday = models.PositiveIntegerField(default=8, help_text='Start hour for Wednesday (0-23)')
+    end_wednesday = models.PositiveIntegerField(default=17, help_text='End hour for Wednesday (0-23)')
+    start_thursday = models.PositiveIntegerField(default=8, help_text='Start hour for Thursday (0-23)')
+    end_thursday = models.PositiveIntegerField(default=17, help_text='End hour for Thursday (0-23)')
+    start_friday = models.PositiveIntegerField(default=8, help_text='Start hour for Friday (0-23)')
+    end_friday = models.PositiveIntegerField(default=17, help_text='End hour for Friday (0-23)')
+    start_saturday = models.PositiveIntegerField(default=8, help_text='Start hour for Saturday (0-23)')
+    end_saturday = models.PositiveIntegerField(default=17, help_text='End hour for Saturday (0-23)')
+    start_sunday = models.PositiveIntegerField(default=8, help_text='Start hour for Sunday (0-23)')
+    end_sunday = models.PositiveIntegerField(default=17, help_text='End hour for Sunday (0-23)')
 
     def __str__(self):
         return self.name
 
-class EmployeeAvailability(models.Model):
-    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    day = models.CharField(choices=DAY_CHOICES, max_length=10)
-    start_hour = models.TimeField()
-    end_hour = models.TimeField()
-
-    def __str__(self):
-        return f"{self.employee} ({self.day})"
 
 
 class Store(models.Model):

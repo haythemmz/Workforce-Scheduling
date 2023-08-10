@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Detail</title>
+</head>
+<body>
+    <h1>Employee Detail</h1>
+    <p><strong>Name:</strong> {{ employee.name }}</p>
+    <p><strong>Phone Number:</strong> {{ employee.phone_number }}</p>
+    <p><strong>Birthday:</strong> {{ employee.birthday }}</p>
+    <p><strong>Min Working Hours Weekly:</strong> {{ employee.min_working_hours_weekly }}</p>
+    <p><strong>Max Working Hours Weekly:</strong> {{ employee.max_working_hours_weekly }}</p>
+
+    <h2>Availability</h2>
+    <table>
+        <tr>
+            <th>Day</th>
+            <th>Start Hour</th>
+            <th>End Hour</th>
+        </tr>
+        <tr>
+            <td>Monday</td>
+            <td>{{ employee.start_monday }}</td>
+            <td>{{ employee.end_monday }}</td>
+        </tr>
+        <tr>
+            <td>Tuesday</td>
+            <td>{{ employee.start_tuesday }}</td>
+            <td>{{ employee.end_tuesday }}</td>
+        </tr>
+        <!-- Repeat for other days -->
+    </table>
+</body>
+</html>
+
+

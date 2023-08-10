@@ -1,4 +1,3 @@
-<!-- add_edit_employee.html -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +7,16 @@
     <h1>Add/Edit Employee</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        
+        {{ employee_form.non_field_errors }}
+        <div class="fieldWrapper">
+            {{ employee_form.name.label_tag }} {{ employee_form.name }}
+            {{ employee_form.phone_number.label_tag }} {{ employee_form.phone_number }}
+            {{ employee_form.birthday.label_tag }} {{ employee_form.birthday }}
+            {{ employee_form.min_working_hours_weekly.label_tag }} {{ employee_form.min_working_hours_weekly }}
+            {{ employee_form.max_working_hours_weekly.label_tag }} {{ employee_form.max_working_hours_weekly }}
+        </div>
+        
         <h2>Availability</h2>
         <table>
             <thead>
@@ -19,15 +27,45 @@
                 </tr>
             </thead>
             <tbody>
-                {% for formset in availability_forms %}
                 <tr>
-                    <td>{{ formset.day }}</td>
-                    <td>{{ formset.start_hour }}</td>
-                    <td>{{ formset.end_hour }}</td>
+                    <td>Monday</td>
+                    <td>{{ employee_form.start_monday }}</td>
+                    <td>{{ employee_form.end_monday }}</td>
                 </tr>
-                {% endfor %}
+                <tr>
+                    <td>Tuesday</td>
+                    <td>{{ employee_form.start_tuesday }}</td>
+                    <td>{{ employee_form.end_tuesday }}</td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>{{ employee_form.start_wednesday }}</td>
+                    <td>{{ employee_form.end_wednesday }}</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>{{ employee_form.start_thursday }}</td>
+                    <td>{{ employee_form.end_thursday }}</td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td>{{ employee_form.start_friday }}</td>
+                    <td>{{ employee_form.end_friday }}</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>{{ employee_form.start_saturday }}</td>
+                    <td>{{ employee_form.end_saturday }}</td>
+                </tr>
+                <tr>
+                    <td>Sunday</td>
+                    <td>{{ employee_form.start_sunday }}</td>
+                    <td>{{ employee_form.end_sunday }}</td>
+                </tr>
             </tbody>
+            
         </table>
+        
         <input type="submit" value="Save">
     </form>
 </body>
